@@ -13,28 +13,30 @@ const db = mysql.createConnection(
   console.log(`Connected to the company_db database.`)
 );
 
-function menu() {
+//present user with option menu for tasks
+//then depending on user choice, call task related function
+function options() {
   inquirer
     .prompt({
-      name: 'menu',
-      type: 'list',
+      name: "options",
+      type: "list",
       message: "What would you like to do?",
       choices: [
-        'view all departments',
-        'view all roles',
-        'view all employees',
-        'add a department',
-        'add a role',
-        'add an employee',
-        'update an employee role',
-        'delete a department',
-        'delete a role',
-        'delte an employee',
-        'Exit',
+        "view all departments",
+        "view all roles",
+        "view all employees",
+        "add a department",
+        "add a role",
+        "add an employee",
+        "update an employee role",
+        "delete a department",
+        "delete a role",
+        "delte an employee",
+        "Exit",
       ],
     })
     .then((answer) => {
-      switch (answer.menu) {
+      switch (answer.options) {
         case "view all departments":
           viewDepartments();
           break;
@@ -80,3 +82,40 @@ function menu() {
       }
     });
 }
+
+//create each task related function
+//show department table contents
+function viewDepartments() {
+  const sql = "SELECT * FROM department";
+
+  db.query(sql, (err, result) => {
+    if (err) throw err;
+    console.log("Showing all departments");
+    console.table(result);
+    options();
+  });
+}
+
+//show role table contents
+function viewRoles() {
+  const sql = "SELECT * FROM role";
+
+  db.query(sql, (err, result) => {
+    if (err) throw err;
+    console.log("Showing all roles");
+    console.table(result);
+    options();
+  });
+}
+
+// show employee table contents
+function viewEmployees() {
+    const sql = 'SELECT * FROM employee';
+  
+    db.query(sql, (err, result) => {
+      if (err) throw err;
+      console.log('Showing all employee information');
+      console.table(result);
+      options();
+    })
+  }
