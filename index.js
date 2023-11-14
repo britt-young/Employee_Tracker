@@ -110,12 +110,206 @@ function viewRoles() {
 
 // show employee table contents
 function viewEmployees() {
-    const sql = 'SELECT * FROM employee';
+  const sql = "SELECT * FROM employee";
+
+  db.query(sql, (err, result) => {
+    if (err) throw err;
+    console.log("Showing all employee information");
+    console.table(result);
+    options();
+  });
+}
+
+//add a department to the database company_db
+function addDepartment() {
+  inquirer
+    .prompt([
+      {
+        name: "department",
+        type: "input",
+        message: "Enter the department name you want to add to the database",
+        validate: (value) => {
+          if (value) {
+            return true;
+          } else {
+            console.log("Must enter a deartment name");
+          }
+        },
+      },
+    ])
+    .then((answer) => {
+      const sql = `INSERT INTO department (name) VALUE ('${answer.department}')`;
+
+      db.query(sql, (err) => {
+        if (err) throw err;
+        console.log(
+          `${answer.department} department has successfully been added`
+        );
+        options();
+      });
+    });
+}
+
+//add a role (title, salary, and department id) to the database company_db
+function addRole() {
+  const sql = "SELECT * FROM department";
+  db.query(sql, (err, results) => {
+    if (err) throw err;
+
+    inquirer
+      .prompt([
+        {
+          name: "title",
+          type: "input",
+          message: "Enter the title of the new role you wish you add",
+          validate: (value) => {
+            if (value) {
+              return true;
+            } else {
+              console.log("Must enter the role's title");
+            }
+          },
+        },
+        {
+          name: "salary",
+          type: "input",
+          message: "Enter thr new role's salary",
+          validate: (value) => {
+            if (isNaN(value) === false) {
+              return true;
+            }
+            console.log("Must enter a number");
+          },
+        },
+        {
+          name: "department_ID",
+          type: "rawlist",
+          choices: () => {
+            let choiceArray = [];
+            for (let i = 0; i < results.length; i++) {
+              choiceArray.push(results[i].name);
+            }
+            return choiceArray;
+          },
+          message: "Assign the new role to a department",
+        },
+      ])
+      .then((answer) => {
+        let chosenDept;
+        for (let i = 0; i < results.length; i++) {
+          if (results[i].name === answer.department_ID) {
+            chosenDept = results[i];
+          }
+        }
+
+        const sql = `INSERT INTO employee (title, salary, department_id) 
+          VALUE ('${answer.title}','${answer.salary}','${chosenDept.id}')`;
+
+        db.query(sql, (err) => {
+          if (err) throw err;
+          console.log(`The new role ${answer.title} has successfully been added`);
+          options();
+        });
+      });
+  });
+}
+
+//add employee (name, role, manager) to the company_db database
+function addEmployee() {
+    inquirer.prompt([
+      {
+        name: "firstName",
+        type: "input",
+        message: "Please enter the employee's first name",
+        validate: (value) => {
+          if (value) {
+            return true;
+          } else {
+            console.log("Must enter a first name");
+          }
+        }
+      },
+      {
+        name: "lastName",
+        type: "input",
+        message: "Please enter the employee's last name",
+        validate: (value) => {
+          if (value) {
+            return true;
+          } else {
+            console.log("Must have a last name");
+          }
+        }
+      },
+      {
+        name: "role_id",
+        type: "number",
+        message: "Enter a role id",
+        validate: (value) => {
+          if (value) {
+            return true;
+          } else {
+            console.log("Must enter a role id.");
+          }
+        }
+      },
+      {
+        name: "manager_id",
+        type: "input",
+        message: "Enter the employee's manager id?(If no manger, just skip)",
+      }
+    ]).then(answer => {
+      let manager_id;
+      if (answer.manager_id === '') {
+        manager_id = null;
+      } else {
+        manager_id = answer.manager_id;
+      }
+      const sql = `INSERT INTO employee (first_name, last_name, role_id, manager_id) 
+        VALUES ('${answer.firstName}', '${answer.lastName}', ${answer.role_id}, ${manager_id})`;
   
-    db.query(sql, (err, result) => {
-      if (err) throw err;
-      console.log('Showing all employee information');
-      console.table(result);
-      options();
+      db.query(sql, (err) => {
+        if (err) throw err;
+        console.log(`New employee ${answer.firstName} ${answer.lastName} has successfully been added`);
+        options();
+      })
+    });
+  }
+
+  //select an employee to update and their new role (updated in the company_db database)
+function updateRole() {
+    inquirer.prompt([
+      {
+        name: "employee_id",
+        type: "number",
+        message: "Enter the employee ID of the employee you want to update",
+        validate: (value) => {
+          if (value) {
+            return true;
+          } else {
+            console.log("Must enter an employee id.");
+          }
+        }
+      },
+      {
+        name: "role_id",
+        type: "number",
+        message: "Enter the new role ID",
+        validate: (value) => {
+          if (value) {
+            return true;
+          } else {
+            console.log("Must enter the employee new role id.");
+          }
+        }
+      }
+    ]).then(answer => {
+      const sql = `UPDATE employee SET role_id = '${answer.role_id}' WHERE id = '${answer.employee_id}'`
+  
+      db.query(sql, (err) => {
+        if (err) throw err;
+        console.log(`No.${answer.employee_id} employee role has successfully been updated`);
+        options();
+      })
     })
   }
