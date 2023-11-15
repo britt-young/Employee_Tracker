@@ -138,7 +138,7 @@ function addDepartment() {
       },
     ])
     .then((answer) => {
-      const sql = `INSERT INTO department (name) VALUE ('${answer.department}')`;
+      const sql = `INSERT INTO department (named) VALUE ('${answer.department}')`;
 
       db.query(sql, (err) => {
         if (err) throw err;
@@ -202,7 +202,7 @@ function addRole() {
           }
         }
 
-        const sql = `INSERT INTO employee (title, salary, department_id) 
+        const sql = `INSERT INTO role (title, salary, department_id) 
           VALUE ('${answer.title}','${answer.salary}','${chosenDept.id}')`;
 
         db.query(sql, (err) => {
