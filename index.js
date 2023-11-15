@@ -313,3 +313,85 @@ function updateRole() {
       })
     })
   }
+
+// ------------------ Bouns -------------------
+// enter the id of the department you wish you delete from the company_db database
+function deleteDepartment() {
+    inquirer.prompt([
+      {
+        name: "department_ID",
+        type: "number",
+        message: "Enter the department ID you want to DELETE",
+        validate: (value) => {
+          if (value) {
+            return true;
+          } else {
+            console.log("Must enter the department id.");
+          }
+        }
+      }
+    ]).then(answer => {
+      const sql = `DELETE from department where id = '${answer.department_ID}'`;
+  
+      db.query(sql, (err) => {
+        if (err) throw err;
+        console.log(`No.${answer.department_ID} department has successfully been deleted`);
+        options();
+      })
+    });
+  }
+  
+  // enter the id of the role user wishes to delete from company_db database
+  function deleteRole() {
+    inquirer.prompt([
+      {
+        name: "role_ID",
+        type: "number",
+        message: "Enter the role ID you want to DELETE",
+        validate: (value) => {
+          if (value) {
+            return true;
+          } else {
+            console.log("Must enter the role id.");
+          }
+        }
+      }
+    ]).then(answer => {
+      const sql = `DELETE from role where id = '${answer.role_ID}'`;
+  
+      db.query(sql, (err) => {
+        if (err) throw err;
+        console.log(`NO.${answer.role_ID} role has successfully been deleted`);
+        options();
+      })
+    });
+  }
+  
+  // enter the id of the employee and that employee is deleted from the database
+  function deleteEmployee() {
+    inquirer.prompt([
+      {
+        name: "employee_ID",
+        type: "number",
+        message: "Enter the role ID you want to DELETE",
+        validate: (value) => {
+          if (value) {
+            return true;
+          } else {
+            console.log("Must enter the role id.");
+          }
+        }
+      }
+    ]).then(answer => {
+      const sql = `DELETE from employee where id = '${answer.employee_ID}'`;
+  
+      db.query(sql, (err) => {
+        if (err) throw err;
+        console.log(`NO.${answer.employee_ID} employee has successfully been deleted`);
+        options();
+      })
+    });
+  }
+  
+  //calls options function and prompts user with question menu
+  options();
