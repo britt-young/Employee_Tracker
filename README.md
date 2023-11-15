@@ -7,7 +7,6 @@ I WANT to be able to view and manage the departments, roles, and employees in my
 SO THAT I can organize and plan my business
 
 ## Table of Contents
-If your README is long, add a table of contents to make it easy for users to find what they need.
 
 - [Installation](#installation)
 - [Usage](#usage)
@@ -15,19 +14,19 @@ If your README is long, add a table of contents to make it easy for users to fin
 - [License](#license)
 
 ## Installation
+* Install MySQL [here](https://coding-boot-camp.github.io/full-stack/mysql/mysql-installation-guide)
+* Setup node.js by running ```npm init -y``` and ```npm install``` to install the npm packages
+* Require the Inquirer package and MySQL in your index.js file
 
-Inquirer
-node.js
-MySQL
 
 ## Usage
+* Create a database by entering ```mysql -u <username> -p <password>``` in the terminal to login
+* Enter the command ```SOURCE schema.sql```, ```seeds.sql```, and ```query.sql```to populate and deploy the database
+* Invoke the application using the command ```md node index.js```
 
-Provide instructions and examples for use. Include screenshots as needed.
-
-To add a screenshot, create an `assets/images` folder in your repository and upload your screenshot to it. Then, using the relative filepath, add it to your README using the following syntax:
 
     ```md
-    ![alt text](assets/images/screenshot.png)
+    ![walk-through video demonstration](assets/images/screenshot.png)
     ```
 
 ## Credits
