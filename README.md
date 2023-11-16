@@ -21,7 +21,7 @@ SO THAT I can organize and plan my business
 
 ## Usage
 * Create a database by entering ```mysql -u <username> -p <password>``` in the terminal to login
-* Enter the command ```SOURCE schema.sql```, ```seeds.sql```, and ```query.sql``` to populate and deploy the database
+* Enter the command ```SOURCE db/schema.sql```, ```db/seeds.sql```, and ```db/query.sql``` to populate and deploy the database
 * Invoke the application using the command ```node index.js```
 
 
