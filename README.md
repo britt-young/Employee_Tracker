@@ -13,7 +13,7 @@ SO THAT I can organize and plan my business
 - [License](#license)
 
 ## Installation
-* Install MySQL [here](https://coding-boot-camp.github.io/full-stack/mysql/mysql-installation-guide)
+* Install MySQL [here](https://coding-boot-camp.github.io/full-stack/mysql/mysql-installation-guide) and add to package.json with the command ```npm install mysql --save```
 * Setup node.js by running ```npm init -y``` and ```npm install``` to install the npm packages
 * Require the Inquirer package and MySQL in your index.js file ```npm i inquirer@8.2.4```
 
