@@ -1,5 +1,5 @@
 //pull in required pakages
-const inquirer = require('inquirer');
+import inquirer from 'inquirer';
 const mysql = require('mysql2');
 
 // Connect to database
