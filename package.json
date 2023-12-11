@@ -13,8 +13,6 @@
     "inquirer": "^9.2.12"
   },
   
-  "devDependencies": {}
-  { 
-    "type": "module"
-  }
+  "devDependencies": {},
+  "type": "module"
 }
