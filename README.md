@@ -13,14 +13,14 @@ SO THAT I can organize and plan my business
 - [License](#license)
 
 ## Installation
-* Install MySQL [here](https://coding-boot-camp.github.io/full-stack/mysql/mysql-installation-guide) and add to package.json with the command ```npm install mysql --save```
+* Install MySQL [here](https://coding-boot-camp.github.io/full-stack/mysql/mysql-installation-guide) and add to package.json with the command ```npm install mysql2 --save```
 * Setup node.js by running ```npm init -y``` and ```npm install``` to install the npm packages
 * Require the Inquirer package and MySQL in your index.js file ```npm i inquirer@8.2.4```
 
 
 ## Usage
 * Create a database by entering ```mysql -u <username> -p <password>``` in the terminal to login
-* Enter the command ```SOURCE db/schema.sql```, ```db/seeds.sql```, and ```db/query.sql``` to populate and deploy the database
+* Enter the command ```SOURCE db/schema.sql```, ```SOURCE db/seeds.sql```, and ```SOURCE db/query.sql``` to populate and deploy the database
 * Invoke the application using the command ```node index.js```
 
 
