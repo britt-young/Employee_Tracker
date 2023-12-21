@@ -23,10 +23,8 @@ SO THAT I can organize and plan my business
 * Enter the command ```SOURCE db/schema.sql```, ```SOURCE db/seeds.sql```, and ```SOURCE db/query.sql``` to populate and deploy the database
 * Invoke the application using the command ```node index.js```
 
-
-    ```md
-    [walk-through video demonstration](assets/images/screenshot.png)
-    ```
+Click on the [walk-through video demonstration](assets\SQL_EmployeeTrackerDemoVideo.webm) for more information regarding usage
+    
 
 ## License
 Copyright (c) 2023 Brittney Young. This project is MIT licensed.
